@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Crc32.NET" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <ProjectReference Include="..\Collector.Collection\Collector.Collection.csproj" />
+    <ProjectReference Include="..\Collector.Compression\Collector.Compression.csproj" />
+    <ProjectReference Include="..\Collector.Data\Collector.Data.csproj" />
+  </ItemGroup>
+
+</Project>

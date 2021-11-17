@@ -1,0 +1,19 @@
+{
+  "update": {
+    "repositoruUrl": "https://github.com/AnttiChristian/collector-data.git"
+  },
+  "directoryScanner": {
+    "sourceDirectory": "c:\\temp\\collector\\",
+    "defaultFilter": "*.atr"
+  },
+  "import": {
+    "mame": {
+      "executable": "c:\\Programs\\MAME\\mame.exe",
+      "version": ""
+    }
+  },
+  "application": {
+    "applicationName": "Collector.TT",
+    "databaseRelativePath": "Database"
+  }
+}

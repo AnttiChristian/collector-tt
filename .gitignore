@@ -1,0 +1,11 @@
+# hidden folders
+.*
+
+# build results
+**/bin
+**/obj
+
+# user settings
+**/*.user
+
+!.gitignore

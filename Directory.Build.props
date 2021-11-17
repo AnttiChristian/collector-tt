@@ -1,0 +1,13 @@
+<Project>
+  <PropertyGroup Label="MsBuild properties">
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+  </PropertyGroup>
+  
+  <PropertyGroup Label="Project properties">
+    <Nullable>enable</Nullable>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <LangVersion>preview</LangVersion>
+  </PropertyGroup>
+</Project>

@@ -1,0 +1,18 @@
+<Project>
+  <ItemGroup>
+    <PackageVersion Include="MahApps.Metro" Version="2.4.9" />
+    <PackageVersion Include="MahApps.Metro.IconPacks" Version="4.11.0" />
+    <PackageVersion Include="Microsoft.Extensions.Configuration.Json" Version="6.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.Configuration.Abstractions" Version="6.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.Logging.Abstractions" Version="6.0.0" />
+    <PackageVersion Include="LibGit2Sharp" Version="0.27.0-preview-0158" />
+    <PackageVersion Include="Crc32.NET" Version="1.2.0" />
+    <PackageVersion Include="MahApps.Metro.SimpleChildWindow" Version="2.0.0" />
+    <PackageVersion Include="AngleSharp" Version="1.0.0-alpha-844" />
+    <PackageVersion Include="LiteDB" Version="5.0.11" />
+    <PackageVersion Include="Microsoft.Extensions.Logging.Abstractions" Version="6.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.Logging.Console" Version="6.0.0" />
+    <PackageVersion Include="SharpCompress" Version="0.30.0" />
+    <PackageVersion Include="Crc32.NET" Version="1.2.0" />
+  </ItemGroup>
+</Project>

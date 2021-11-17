@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Platforms>AnyCPU;x64</Platforms>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Collector.Collection\Collector.Collection.csproj" />
+    <ProjectReference Include="..\Collector.Cryptography\Collector.Cryptography.csproj" />
+  </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="SharpCompress" />
+    </ItemGroup>
+
+</Project>
