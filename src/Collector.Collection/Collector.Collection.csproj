@@ -9,7 +9,6 @@
   </ItemGroup>
 
     <ItemGroup>
-    <ProjectReference Include="..\Collector.Data\Collector.Data.csproj" />
     <ProjectReference Include="..\Collector.Update\Collector.Update.csproj" />
   </ItemGroup>
 

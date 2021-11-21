@@ -1,19 +1,25 @@
-﻿using Collector.Data;
-using Collector.Update;
+﻿using Collector.Update;
 
 using Microsoft.Extensions.Configuration;
 
 using System.Linq;
+using System.Text.Json;
 
 namespace Collector.Collection;
 
 public static class CollectionManager
 {
-    public static readonly Collection Collection = new Collection();
+    public static Collection Collection = new();
+
+    private static readonly JsonSerializerOptions _jsonSerializerOptions = new()
+    {
+        PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+    };
+
 
     public static async Task BuildCollection(IConfiguration configuration)
     {
-        Collection.Manufacturers.Clear();
+        Collection?.Manufacturers.Clear();
 
         var dataFolder = Path.Combine(
             Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
@@ -23,31 +29,35 @@ public static class CollectionManager
         IUpdater updater = IUpdater.Create("github", configuration);
         await updater.Update(dataFolder);
 
-        Repository.Load(dataFolder);
-
-        foreach (var manufacturerRecord in Repository.Manufacturers)
+        if (File.Exists(Path.Combine(dataFolder, "manufacturers.json")))
         {
-            var manufacturer = new Manufacturer
-            {
-                Code = manufacturerRecord.Code,
-                Id = manufacturerRecord.Id,
-                Name = manufacturerRecord.Name
-            };
+            Collection = JsonSerializer.Deserialize<Collection>(File.ReadAllText(Path.Combine(dataFolder, "collection.json")), _jsonSerializerOptions)
+                ?? new Collection();
 
-            foreach (var hardwareRecord in Repository.Hardware.Where(h => h.ManufacturerId == manufacturer.Id))
+            Collection!.Manufacturers.AddRange(
+                JsonSerializer.Deserialize<List<Manufacturer>>(
+                    File.ReadAllText(Path.Combine(dataFolder, "manufacturers.json")) ?? "[]", _jsonSerializerOptions)?
+                    .OrderBy(s => s.Name) ?? Enumerable.Empty<Manufacturer>());
+
+            var hardware = JsonSerializer.Deserialize<List<Hardware>>(
+                   File.ReadAllText(Path.Combine(dataFolder, "hardware.json")) ?? "[]", _jsonSerializerOptions)?
+                   .OrderBy(s => s.Name) ?? Enumerable.Empty<Hardware>();
+
+            foreach (var manufacturer in Collection.Manufacturers)
             {
-                var hardware = new Hardware
+                foreach (var hardwareRecord in hardware.Where(h => h.ManufacturerId == manufacturer.Id))
                 {
-                    Code = hardwareRecord.Code,
-                    Id = hardwareRecord.Id,
-                    ManufacturerId = hardwareRecord.ManufacturerId,
-                    Name = hardwareRecord.Name
-                };
+                    var hardwareItem = new Hardware
+                    {
+                        Code = hardwareRecord.Code,
+                        Id = hardwareRecord.Id,
+                        ManufacturerId = hardwareRecord.ManufacturerId,
+                        Name = hardwareRecord.Name
+                    };
 
-                manufacturer.Hardware.Add(hardware);
+                    manufacturer.Hardware.Add(hardwareItem);
+                }
             }
-
-            Collection.Manufacturers.Add(manufacturer);
         }
     }
 

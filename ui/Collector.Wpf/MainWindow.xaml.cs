@@ -1,12 +1,10 @@
 ﻿using Collector.Collection;
-using Collector.Identify;
 using Collector.Wpf.Dialogs;
 
 using MahApps.Metro.Controls;
 using MahApps.Metro.SimpleChildWindow;
 
 using System.Diagnostics;
-using System.IO;
 using System.Runtime.InteropServices;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -54,6 +52,15 @@ public partial class MainWindow : MetroWindow
     private void LoadTree()
     {
         DatabaseTree.Items.Clear();
+
+        var rootNode = new TreeViewItem
+        {
+            Tag = CollectionManager.Collection,
+            Header = CollectionManager.Collection.ToString()
+        };
+
+        _ = DatabaseTree.Items.Add(rootNode);
+
         foreach (Manufacturer manufacturer in CollectionManager.Collection.Manufacturers)
         {
             var manufacturerTreeViewItem = new TreeViewItem
@@ -68,50 +75,14 @@ public partial class MainWindow : MetroWindow
                 {
                     Header = hardware.ToString(),
                     Tag = hardware,
-                    Background = new SolidColorBrush(Color.FromRgb(0xe0, 0xff, 0xe0))
+                    Background = new SolidColorBrush(Color.FromRgb(0xff, 0xe0, 0xe0))
                 };
 
                 _ = manufacturerTreeViewItem.Items.Add(hardwareTreeViewItem);
             }
 
-            _ = DatabaseTree.Items.Add(manufacturerTreeViewItem);
+            _ = rootNode.Items.Add(manufacturerTreeViewItem);
         }
-    }
-
-    private async void IdentifyButton_Click(object sender, System.Windows.RoutedEventArgs e)
-    {
-        IdentifyButton.IsEnabled = false;
-        var dialogResult = await this.ShowChildWindowAsync<DirectoryInfo>(new OpenItemDialog
-        {
-            IsModal = true,
-            AllowMove = true
-        });
-
-        if (dialogResult is not null)
-        {
-            var process = new IdentifyProcess();
-            await process.Execute(dialogResult.FullName);
-        }
-
-        IdentifyButton.IsEnabled = true;
-    }
-
-    private async void ImportButton_Click(object sender, System.Windows.RoutedEventArgs e)
-    {
-        ImportButton.IsEnabled = false;
-        var dialogResult = await this.ShowChildWindowAsync<DirectoryInfo>(new OpenItemDialog
-        {
-            IsModal = true,
-            AllowMove = true
-        });
-
-        if (dialogResult is not null)
-        {
-            var process = new IdentifyProcess();
-            await process.Execute(dialogResult.FullName);
-        }
-
-        ImportButton.IsEnabled = true;
     }
 
     protected override async void OnContentRendered(System.EventArgs e)
@@ -127,7 +98,7 @@ public partial class MainWindow : MetroWindow
     private async void ScanButton_Click(object sender, System.Windows.RoutedEventArgs e)
     {
         ScanButton.IsEnabled = false;
-        var dialogResult = await this.ShowChildWindowAsync<DirectoryInfo>(new OpenItemDialog
+        var dialogResult = await this.ShowChildWindowAsync<object>(new ScanDialog
         {
             IsModal = true,
             AllowMove = true

@@ -16,7 +16,7 @@ namespace Collector.Wpf.Dialogs
 
         private void OkButtonOnClick(object sender, RoutedEventArgs e)
         {
-            _ = Close(CloseReason.Ok);
+            _ = Close(CloseReason.Ok, true);
         }
 
         private void CloseSec_OnClick(object sender, RoutedEventArgs e)

@@ -1,8 +1,6 @@
-﻿using Collector.Data;
+﻿namespace Collector.Collection;
 
-namespace Collector.Collection;
-
-public class Dump : EntityRecord
+public class Dump : Entity
 {
     public List<Blob> Blobs { get; set; } = new List<Blob>();
 }

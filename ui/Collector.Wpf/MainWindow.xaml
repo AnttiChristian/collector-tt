@@ -48,13 +48,9 @@
         <ToolBarTray Grid.Row="0">
             <ToolBar>
                 <Button Name="ScanButton" Content="Scan" Click="ScanButton_Click"/>
-                <Button Content="Rebuild"/>
                 <Button Content="Folder settings"/>
             </ToolBar>
-            <ToolBar>
-                <Button Name="IdentifyButton" Content="Identify" Click="IdentifyButton_Click" />
-                <Button Name="ImportButton" Content="Import" Click="ImportButton_Click"/>
-            </ToolBar>
+            <ToolBar/>
         </ToolBarTray>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>

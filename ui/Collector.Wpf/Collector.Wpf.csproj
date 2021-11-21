@@ -16,7 +16,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\Collector.Collection\Collector.Collection.csproj" />
-    <ProjectReference Include="..\..\src\Collector.Identify\Collector.Identify.csproj" />
     <ProjectReference Include="..\..\src\Collector.Update\Collector.Update.csproj" />
   </ItemGroup>
 

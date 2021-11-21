@@ -9,7 +9,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\Collector.Data\Collector.Data.csproj" />
-    <ProjectReference Include="..\..\src\Collector.Import\Collector.Import.csproj" />
   </ItemGroup>
 
 </Project>
